@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>使用Symbol定义protected属性</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    //为了保护属性
+    // const HOST = Symbol();
+    //如果有多个属性需要保护
+    const protecteds = Symbol();
+    class Common {
+      //   [HOST] = "https://baidu.com";
+      constructor() {
+        this[protecteds] = {};
+        this[protecteds].host = "https://baidu.com";
+      }
+      set host(url) {
+        if (!/^https?:/i.test(url)) {
+          throw new Error("这是非法网址");
+        }
+        this[protecteds].host = url;
+      }
+      get host() {
+        return this[protecteds].host;
+      }
+      get name() {
+        return this[protecteds].name;
+      }
+    }
+    class User extends Common {
+      //   _url = "https://baidu.com";
+      constructor(name) {
+        super();
+        this[protecteds].name = name;
+      }
+    }
+    let h = new User("大明");
+    h.host = "https://google.com";
+    console.log(h);
+    console.log(h.host);
+  </script>
+</html>

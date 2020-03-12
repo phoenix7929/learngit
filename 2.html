@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>静态方法的实现原理</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    // function User() {
+    //   //this.show = function() {};
+    // }
+    // //把方法放到原型里共用
+    // User.prototype.show = function() {
+    //   console.log("prototype function show");
+    // };
+    // //let hd = new User();
+    // //console.log(hd);
+    // // hd.show(); //hd也是指向User的原型
+    // //每定义一个新的对象，就会创建一个属性show，然后值是方法
+    // // let hd1 = new User();
+    // // console.log(hd1);
+    // //直接定义在函数对象当中的方法叫做静态方法
+    // // User.show = function() {
+    // //   //   console.log(this);
+    // //   console.log("static show");
+    // // };
+    // //也能够定义在函数对象的原型上
+    // User.__proto__.show = function() {
+    //   console.log(this == User.prototype.constructor);
+    //   console.log("static show in __proto__");
+    // };
+    // // console.dir(User);
+    // //调用静态方法只能通过函数对象调用，不能用实例去调用
+    // User.show();
+
+    // class User {
+    //   show() {
+    //     console.log("prototype show");
+    //   }
+    //   static show() {
+    //     console.log("static function");
+    //   }
+    // }
+    // // console.log(typeof User); //function
+    // //User.__proto__.s
+    // console.dir(User);
+    // User.show();
+    // let hd = new User();
+    // hd.show();
+
+    class Member {
+      constructor(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+      }
+      //拓展性加强
+      static create(...args) {
+        return new this(...args);
+      }
+    }
+
+    let xj = Member.create("小明", 19, "male");
+    console.log(xj);
+  </script>
+</html>

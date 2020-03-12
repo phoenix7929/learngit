@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>private私有属性的使用</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    class Common{
+        //变成私有方法
+        #check = () => {
+        if (this.name.length < 5) {
+          throw new Error("名字长度不得超过五位");
+        }
+        return true;
+      };
+    }
+    class User extends Common{
+      //变成私有属性 在属性名前面加#
+      #host = "https://baidu.com";
+      constructor(name) {
+         super();
+        this.name = name;
+        this.check(name);
+      }
+      set host(url) {
+        if (!/^https?:/i.test(url)) {
+          throw new Error("这是非法网址");
+        }
+        this.#host = url;
+      }
+      get host() {
+        return this.#host;
+      }
+
+    }
+    let hd = new User("小小小心心明");
+    //hd.#host = "https://google.com";//Uncaught SyntaxError: Private field '#host' must be declared in an enclosing class
+    hd.host = "https://google.com"; //这样修改实际是通过访问器改的
+    console.log(hd);
+    // hd.name = "qqqqqq";
+    hd.#check(); //Uncaught SyntaxError: Private field '#check' must be declared in an enclosing class
+  </script>
+</html>

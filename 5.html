@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>使用命名规则保护属性</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    class Host {
+      _url = "https://baidu.com";
+      constructor(name) {
+        this.name = name;
+      }
+      set url(url) {
+        if (!/^https?:/i.test(url)) {
+          throw new Error("这是非法网址");
+        }
+        //可以人为添加下划线，当作是保护属性
+        this._url = url;
+        return true;
+      }
+    }
+    let h = new Host("小明");
+    //使用上面的方式很容易就可以从外部更改对象属性
+    h.url = "https://google.com";
+    console.log(h);
+  </script>
+</html>

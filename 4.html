@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>在类中使用访问器</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    class Request {
+      constructor(host) {
+        this.data = {};
+        this.host = host;
+        // this._host = url;
+        //还可以利用对象保存url
+      }
+      //访问器
+      set host(url) {
+        if (!/^https?:\/\//i.test(url)) {
+          throw new Error("地址错误");
+        }
+        // this.host = url;
+        // this._host = url;
+        this.data.host = url;
+      }
+      get host() {
+        return this.data.host;
+      }
+    }
+    let hd = new Request("https://www.baidu.com");
+    // hd.host = "https://www.google.com"; //当这样赋值，进入访问器之后，又再一次赋值，所以又重新进入访问器，导致死循环
+    //Uncaught RangeError: Maximum call stack size exceeded
+    // hd.setHost("https://www.google.com");
+    console.log(hd.host);
+  </script>
+</html>

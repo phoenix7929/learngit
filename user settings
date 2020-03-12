@@ -1,0 +1,14 @@
+{
+    "editor.fontSize": 16,
+    "workbench.colorTheme": "Monokai",
+    "files.autoSave": "onFocusChange",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.fullReload": true,
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4, //vscode设置的缩进量
+    "editor.formatOnSave": true, //保存时候自动格式化
+    "editor.snippetSuggestions": "top"
+}

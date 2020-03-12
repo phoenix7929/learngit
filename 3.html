@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>静态属性练习之课程管理</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    const data = [
+      { name: "js", price: 100 },
+      { name: "mysql", price: 212 },
+      { name: "vue.js", price: 98 }
+    ];
+    class Lesson {
+      constructor(data) {
+        this.model = data;
+      }
+      //批量创建
+      static createBatch(data) {
+        return data.map(item => new Lesson(item));
+      }
+      //访问器
+      get price() {
+        return this.model.price;
+      }
+      get name() {
+        return this.model.name;
+      }
+      //统计价格
+      static totalPrice(data) {
+        return data.reduce((item, a) => {
+          return item + a.price;
+        }, 0);
+      }
+      //获取最高价格
+      static maxPrice(data) {
+        // console.log(data);
+        //返回一个数组，取第一个为最大
+        return data.sort((a, b) => b.price - a.price)[0];
+      }
+    }
+    // let obj1 = new Lesson(data[0]);
+    // console.log(obj1);
+    let lessons = Lesson.createBatch(data);
+    console.log(Lesson.maxPrice(lessons).price);
+    console.log(Lesson.maxPrice(lessons).name);
+    console.log(Lesson.totalPrice(lessons));
+    // console.log(lessons);
+  </script>
+</html>

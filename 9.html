@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>class属性继承原理</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    // function User(name) {
+    //   this.name = name;
+    // }
+    // function Admin(name) {
+    //   //   this.name = name;
+    //   //属性的继承
+    //   User.call(this, name);
+    //   //   this.show = function() {
+    //   //     console.log(this.name);
+    //   //   };
+    // }
+    // //Admin继承User
+    // Admin.prototype = Object.create(User.prototype);
+    // //在原型链上面添加方法实现方法的继承
+    // Admin.prototype.show = function() {};
+    // console.dir(Admin);
+    // let a = new Admin("qq");
+    // console.log(a);
+    // a.show();
+
+    class User {
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    class Admin extends User {
+      constructor(name) {
+        super(name);
+      }
+    }
+    let hd = new Admin("admin");
+    console.log(hd);
+  </script>
+</html>
