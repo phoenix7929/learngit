@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>静态属性的使用</title>
+  </head>
+  <body>
+    <script>
+    //   function Web(url) {
+    //     this.url = url;
+    //   }
+    //   let hd = new Web();
+    //   console.log(hd.url); //这是对象的属性
+    //   console.dir(hd);
+    //   Web.url = "google.com";
+    //   console.log(Web.url);//这是静态属性
+    //   console.dir(Web);
+
+    class Request{
+        //host = "https://www.baidu.com"
+        //添加static，成为静态属性
+        static host = "https://www.baidu.com"
+    api(url){
+        return Request.host+ `/${url}`;
+    }
+    }
+    let obj = new Request();
+    // console.log(obj);
+    let obj2 = new Request();
+    //即使更改obj的属性也不会改变obj2的属性
+obj.host = "google.com";
+// console.log(obj);
+console.dir(Request);
+console.log(obj2);//Request {}
+
+console.log(obj.api("article"));
+    </script>
+  </body>
+</html>

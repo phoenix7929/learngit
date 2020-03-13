@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>类的方法继承原理</title>
+  </head>
+
+  <body></body>
+  <script>
+    "use stricts";
+    // function User() {}
+    // User.prototype.show = function() {
+    //   console.log("user show");
+    // };
+    // function Admin() {}
+    // Admin.prototype = Object.create(User.prototype);
+    // let a = new Admin();
+    // a.show();
+
+    class User {
+      show() {
+        //方法是在原型链上
+        console.log("show here");
+      }
+    }
+    class Admin extends User {
+      constructor(name) {
+        super();
+        this.name = name; //属性是在对象上
+      }
+    }
+    console.dir(Admin);
+    let a = new Admin("婷婷");
+    console.log(a.__proto__ == Admin.prototype);
+    a.show();
+    console.log(a);
+  </script>
+</html>
